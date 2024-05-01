@@ -184,6 +184,7 @@ class _ExpandTextState extends State<ExpandText>
     return LayoutBuilder(
       builder: (context, size) {
         final defaultTextStyle = (child as DefaultTextStyle).style;
+        final textScaler = MediaQuery.textScalerOf(context);
 
         final textPainter = TextPainter(
           text: TextSpan(
@@ -191,6 +192,7 @@ class _ExpandTextState extends State<ExpandText>
             style: defaultTextStyle,
           ),
           textDirection: TextDirection.ltr,
+          textScaler: textScaler,
           maxLines: widget.maxLines,
         )..layout(maxWidth: size.maxWidth);
 
