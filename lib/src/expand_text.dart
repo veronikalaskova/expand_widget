@@ -250,18 +250,6 @@ class _ExpandTextState extends State<ExpandText>
     );
   }
 
-  /// Returns the actual maximun number of allowed lines,
-  /// depending on [_isExpanded].
-  /// If `overflow` is set to ellipsis, it must not return null,
-  /// otherwise the entire app could explode :)
-  int? get _maxLines {
-    if (_isExpanded) {
-      return (widget.overflow == TextOverflow.ellipsis) ? 2 ^ 64 : null;
-    }
-
-    return widget.maxLines;
-  }
-
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
@@ -276,9 +264,9 @@ class _ExpandTextState extends State<ExpandText>
         child: Text(
           widget.data,
           textAlign: widget.textAlign,
-          overflow: widget.overflow,
+          overflow: _isExpanded ? null : widget.overflow,
           style: widget.style,
-          maxLines: _maxLines,
+          maxLines: _isExpanded ? null : widget.maxLines,
         ),
       ),
     );
